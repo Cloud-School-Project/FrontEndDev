@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './LoginRegister.css';
-import schemaRegistration from '../validation/formSchemaRegistration';
-import schemaLogin from '../validation/formSchemaLogin';
+import schemaRegistration from '../validations/formSchemaRegistration';
+import schemaLogin from '../validations/formSchemaLogin';
 import * as yup from 'yup';
 
 
