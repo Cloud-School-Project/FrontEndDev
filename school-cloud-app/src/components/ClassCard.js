@@ -1,11 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from "react-redux"
 import {editClass, deleteClass} from '../store/actions/adminActions'
 
+import EditPopUp from './EditClassPopUp'
+
 const ClassCard = (props) => {
-    console.log("cardProps", props)
     const {item, volunteers} = props // deconstructing
-    // console.log("props.item", props.item.subject)
+    console.log("classCard props", props)
+
+    const [seePopUp, setSeePopUp] = useState({
+        seen: false
+    })
+
+    const togglePopUp = (selection) => {
+        console.log("here", selection)
+        setSeePopUp({
+            ...seePopUp,
+            seen: !seePopUp.seen
+        })
+    }
+
     return (
         <div className="classCard"> 
             <h3>{item.subject}</h3>
@@ -14,26 +28,41 @@ const ClassCard = (props) => {
                 item.morning === null 
                 ? <span>Needs Volunteer</span> 
                 : <span>Filled by {volunteers[item.morning-1].username}</span>
-            }</p>
-            <p>Afternoon: {item.afternoon === null ? <span>Needs Volunteer</span> : <span>Filled by {volunteers[item.afternoon-1].username}</span>}</p>
-            <p>Evening: {item.evening === null ? <span>Needs Volunteer</span> : <span>Filled by {volunteers[item.evening-1].username}</span>}</p>
+                }
+            </p>
+            <p>
+                Afternoon: {
+                item.afternoon === null 
+                ? <span>Needs Volunteer</span> 
+                : <span>Filled by {volunteers[item.afternoon-1].username}</span>
+                }
+            </p>
+            <p>
+                Evening: {
+                item.evening === null 
+                ? <span>Needs Volunteer</span> 
+                : <span>Filled by {volunteers[item.evening-1].username}</span>}
+            </p>
             <div>
-                <button onClick={e=>{
+                <button className="btn" onClick={e=>{
                     e.preventDefault()
-                    console.log("event", e)
-                    console.log("subject", item.subject)
                     props.deleteClass(item.subject)
-                }}>
-                    Delete
+                }}> Delete
                 </button>
-                <button onClick={e=>{
+                <button className="btn" onClick={e=>{
                     e.preventDefault()
-                    props.editClass({subject: "History", morning: 2 })
-                }}>
-                    Edit
+                    togglePopUp(item.subject)
+                }}> Edit
                 </button>
+                {console.log("seePop", seePopUp)}
+                {seePopUp.seen ? <EditPopUp id={props.id} toggle={togglePopUp}/> : null}
+                    
+                    {/* e=>{
+                    e.preventDefault()
+                    props.editClass({subject: "History", morning: 2 })}
+                    }> */}
             </div>
-    </div>
+        </div>
     )
 }
 

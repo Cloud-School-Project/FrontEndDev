@@ -5,7 +5,7 @@ import {Route, Switch} from 'react-router-dom'
 // ! Components
 import Admin from './components/Admin'
 import AddClassForm from './components/AddClassForm';
-
+import Volunteer from './components/Volunteer'
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
           <button>Logout</button>
         </nav>
         <Route exact path="/admin" component={Admin}/>
-        <Route exact path="/add-class" component={AddClassForm}/>
-      
+        <Route exact path="/admin/add-class" component={AddClassForm}/>
+        <Route exact path="/volunteer" component={Volunteer}/>
     </div>
   );
 }

@@ -10,9 +10,8 @@ import ClassCard from './ClassCard'
 
 
 const Admin = (props) => {
-    const {fetchClasses, fetchVolunteers, adminReducer} = props
+    const {fetchClasses, fetchVolunteers, adminState} = props
     useEffect(()=>{
-        console.log("useeffect props", props)
         fetchClasses()
         fetchVolunteers()
     }, [])
@@ -23,22 +22,24 @@ const Admin = (props) => {
 
     //Creates empty and filled class arrays whenever there is a change to props.classes
     useEffect(()=>{
-        setEmptyClasses(adminReducer.classes.filter(item=>{
+        setEmptyClasses(adminState.classes.filter(item=>{
             return item.completed === 0 //*false
         }))
-        setCompletedClasses(adminReducer.classes.filter(item=>{
+        setCompletedClasses(adminState.classes.filter(item=>{
             return item.completed === 1 //*true
         }))
         // setRunningClasses(props.classes.filter(item=>{
         //     return (item.morning !== null || item.afternoon !== null || item.evening !== null)
         // }))
-    }, [adminReducer.classes]) 
+    }, [adminState.classes]) 
 
     return (
         <div>
-            <div className="topbar">
-                <h2>Hello Admin Component</h2>
-                <NavLink exact to='/add-class'>Create New Class</NavLink>
+            <div className="topbar"> 
+                {/* How to make this into a component? vv */}
+                {/* Pass property of username via prop drilling */}
+                <h2>Hello (Admin Name) Component</h2>
+                <NavLink exact to='/admin/add-class'>Create New Class</NavLink>
             </div>
             <div className="admin classlist">
                 <h2>Classes needing a volunteer:</h2>
@@ -58,7 +59,7 @@ const Admin = (props) => {
 
 const mapStateToProps = (state) => {    
     return {
-        adminReducer: state.adminReducer,
+        adminState: state.adminReducer,
         // volunteersReducer: state.volunteersReducer
     }
 }

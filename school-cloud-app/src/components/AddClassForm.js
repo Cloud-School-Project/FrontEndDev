@@ -16,17 +16,11 @@ const AddClassForm = (props) => {
     const changeHandler = ev => {
         ev.persist();
         let value = ev.target.value;
-        // console.log("value", value)
         setNewClass({
-            ...newClass, [ev.target.name]: value
+            ...newClass, 
+            [ev.target.name]: value
         });
     }
-
-    // const onChange = (evt) => {
-    //     const { name, value } = evt.target;
-    //     validate(name, value);
-    //     setValues({ ...values, [name]: value });
-    // };
 
     const handleSubmit = e => {
         e.preventDefault();

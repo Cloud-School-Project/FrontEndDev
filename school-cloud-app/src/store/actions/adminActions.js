@@ -8,7 +8,7 @@ export const fetchClasses = () => {
         axios
             .get("https://lambdacloud.herokuapp.com/classes/class")
             .then((res) =>{
-                console.log("data", res)
+                
                 dispatch({type: "FETCH_CLASSES_SUCCESS", payload: res.data})
             })
             .catch((err)=> {
@@ -20,7 +20,7 @@ export const fetchClasses = () => {
 export const addClass = (newClass) => {
     return (dispatch) => {
         // dispatch({type: "FETCH_CLASSES_START"})
-        console.log("newClassinput", newClass)
+        
         axios
             .post("https://lambdacloud.herokuapp.com/classes/class", newClass)
             .then((res) =>{
